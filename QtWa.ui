@@ -6,189 +6,416 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
-    <height>307</height>
+    <width>496</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>QtWa</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_4">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetNoConstraint</enum>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>421</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>4</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>移位密码</string>
+     </attribute>
+     <widget class="QWidget" name="formLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>371</width>
+        <height>81</height>
+       </rect>
       </property>
-      <item>
-       <layout class="QFormLayout" name="formLayout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>明文(密文）</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="Plaintext">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>请输入英文大小写字母</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>密钥（移位/b）</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="Secretkey_b">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>请输入1~25之间的值</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>密钥（a）</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="Secretkey_a">
-          <property name="placeholderText">
-           <string>与26互质</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>结果</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLineEdit" name="Ciphertext">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>结果</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>密钥（des/aes）</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="key">
-          <property name="placeholderText">
-           <string>密钥只能为8位英文</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="cipher">
-          <property name="placeholderText">
-           <string>des解密</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="des_">
-          <property name="text">
-           <string>密文（des/aes）</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="title">
-         <string>加密方法</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QFormLayout" name="formLayout_3">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label_4">
+         <property name="text">
+          <string>明文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="Plaintext_1"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="Secretkey_1"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="Label_6">
+         <property name="text">
+          <string>密文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="ciphertext_1"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="Label_5">
+         <property name="text">
+          <string>密钥</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>仿射密码</string>
+     </attribute>
+     <widget class="QWidget" name="formLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>371</width>
+        <height>106</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label_7">
+         <property name="text">
+          <string>明文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="Plaintext_2"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="Secretkey_2_1"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="Label_8">
+         <property name="text">
+          <string>密文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="ciphertext_2"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="Label_9">
+         <property name="text">
+          <string>密钥(a)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="bLabel">
+         <property name="text">
+          <string>密钥(b)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="Secretkey_2_2"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>des</string>
+     </attribute>
+     <widget class="QWidget" name="formLayoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>371</width>
+        <height>74</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_5">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label_10">
+         <property name="text">
+          <string>明文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="Plaintext_3"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="Secretkey_3"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="Label_11">
+         <property name="text">
+          <string>密文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="ciphertext_3"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="Label_12">
+         <property name="text">
+          <string>密钥</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>aes</string>
+     </attribute>
+     <widget class="QWidget" name="formLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>371</width>
+        <height>74</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_7">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label_16">
+         <property name="text">
+          <string>明文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="Plaintext_4"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="Secretkey_4"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="Label_17">
+         <property name="text">
+          <string>密文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="ciphertext_4"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="Label_18">
+         <property name="text">
+          <string>密钥</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>rsa</string>
+     </attribute>
+     <widget class="QWidget" name="formLayoutWidget_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>381</width>
+        <height>127</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout_8">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label_19">
+         <property name="text">
+          <string>明文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="Plaintext_5"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>公钥</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="Label">
+         <property name="text">
+          <string>私钥</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="Label_20">
+         <property name="text">
+          <string>密文</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="ciphertext_5"/>
+       </item>
+       <item row="1" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <item>
-            <widget class="QRadioButton" name="gression">
-             <property name="text">
-              <string>移位密码</string>
-             </property>
-             <property name="checked">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="affine">
-             <property name="text">
-              <string>仿射密码</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="des">
-             <property name="text">
-              <string>des</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="aes">
-             <property name="text">
-              <string>aes</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QLabel" name="Label_21">
+           <property name="text">
+            <string>p</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Secretkey_p"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>q</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Secretkey_q"/>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="Encryption">
-          <property name="text">
-           <string>加密</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="Deciphering">
-          <property name="text">
-           <string>解密</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-   </layout>
+       </item>
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLineEdit" name="Secretkey_e"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Secretkey_n_1"/>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="Secretkey_d"/>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="Secretkey_n_2"/>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>MD5</string>
+     </attribute>
+     <widget class="QLineEdit" name="Plaintext_6">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>20</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="ciphertext_6">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>90</y>
+        <width>291</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>密文</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>明文 </string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="Encryption_4">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>240</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>加密</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Deciphering_4">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>240</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string>解密</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>567</width>
+     <width>496</width>
      <height>22</height>
     </rect>
    </property>
@@ -209,34 +436,34 @@
  </resources>
  <connections>
   <connection>
-   <sender>Encryption</sender>
-   <signal>clicked()</signal>
-   <receiver>QtWaClass</receiver>
-   <slot>encryption()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>91</x>
-     <y>223</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>145</x>
-     <y>221</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>Deciphering</sender>
+   <sender>Deciphering_4</sender>
    <signal>clicked()</signal>
    <receiver>QtWaClass</receiver>
    <slot>deciphering()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>537</x>
-     <y>223</y>
+     <x>447</x>
+     <y>660</y>
     </hint>
     <hint type="destinationlabel">
-     <x>309</x>
-     <y>221</y>
+     <x>444</x>
+     <y>700</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Encryption_4</sender>
+   <signal>clicked()</signal>
+   <receiver>QtWaClass</receiver>
+   <slot>encryption()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>670</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>707</y>
     </hint>
    </hints>
   </connection>
@@ -245,5 +472,7 @@
   <slot>encryption()</slot>
   <slot>deciphering()</slot>
   <slot>gcd()</slot>
+  <slot>encryption_1()</slot>
+  <slot>deciphering_1()</slot>
  </slots>
 </ui>

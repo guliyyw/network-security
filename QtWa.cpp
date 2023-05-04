@@ -7,7 +7,8 @@
 #include "AES.h"
 #include "des.h"
 #include "vector"
-
+#include "RSA.h"
+#include "md5.h"
 using namespace std;
 
 int exgcd(int a, int b, int& x, int& y);
@@ -17,13 +18,13 @@ QtWa::QtWa(QWidget *parent)
 {
     ui.setupUi(this);
     //设置正则表达式，可接受字母，数字类型的数据，但不超过11个
-    ui.Plaintext->setValidator(new QRegExpValidator(QRegExp("[A-Za-z]{1,20}")));
+    //ui.Plaintext->setValidator(new QRegExpValidator(QRegExp("[A-Za-z]{1,20}")));
 
-    ui.Secretkey_b->setValidator(new QRegExpValidator(QRegExp("^([1-9]|[1-2][0-5])$")));
+    //ui.Secretkey_b->setValidator(new QRegExpValidator(QRegExp("^([1-9]|[1-2][0-5])$")));
 
-    ui.Secretkey_a->setValidator(new QRegExpValidator(QRegExp("^3|5|7|9|11|15|17|19|21|23|25&")));
+    //ui.Secretkey_a->setValidator(new QRegExpValidator(QRegExp("^3|5|7|9|11|15|17|19|21|23|25&")));
 
-    ui.key->setValidator(new QRegExpValidator(QRegExp("^[A-Za-z]{8,32}&")));
+    //ui.key->setValidator(new QRegExpValidator(QRegExp("^[A-Za-z]{8,32}&")));
 }
 
 //结果 unsigned char 转QString 16进制
@@ -81,12 +82,12 @@ unsigned char HexToAsc(unsigned char aChar) {
 //加密 
 void QtWa::encryption()
 {
-    QString res = "";
-    string text = ui.Plaintext->text().toStdString();
 
     //移位
-    if (ui.gression->isChecked()) {
-        int num = ui.Secretkey_b->text().toInt();
+    if (ui.tabWidget->currentIndex() == 0) {
+        QString res = "";
+        string text = ui.Plaintext_1->text().toStdString();
+        int num = ui.Secretkey_1->text().toInt();
         for (char str : text) {
             int x = str;
             if (x >= 97 && x <= 122) {
@@ -96,12 +97,15 @@ void QtWa::encryption()
                 res += 'A' + (x - 65 + num) % 26;
             }
         }
+        ui.ciphertext_1->setText(res);
     }
 
     //仿射
-    else if(ui.affine->isChecked()){
-        int num_a = ui.Secretkey_a->text().toInt();
-        int num_b = ui.Secretkey_b->text().toInt();
+    else if(ui.tabWidget->currentIndex() == 1){
+        QString res = "";
+        string text = ui.Plaintext_2->text().toStdString();
+        int num_a = ui.Secretkey_2_1->text().toInt();
+        int num_b = ui.Secretkey_2_2->text().toInt();
         for (char str : text) {
             int x = str;
             if (x >= 97 && x <= 122) {
@@ -111,18 +115,24 @@ void QtWa::encryption()
                 res += 'A' + (((x - 65) * num_a) + num_b) % 26;
             }
         }
+        ui.ciphertext_2->setText(res);
     }
 
     //des
-    else if (ui.des->isChecked()) {
+    else if (ui.tabWidget->currentIndex() == 2) {
+        QString res = "";
+        string text = ui.Plaintext_3->text().toStdString();
         string c = "0";
         while (text.length() % 8 != 0)	//明文不足8位自动补0
             text += c;
-        res = QString::fromStdString(ECB(text, ui.key->text().toStdString(), en));
+        res = QString::fromStdString(ECB(text, ui.Secretkey_3->text().toStdString(),en));
+        ui.ciphertext_3->setText(res);
     }
 
     //aes
-    else if (ui.aes->isChecked()) {
+    else if (ui.tabWidget->currentIndex() == 3) {
+        QString res = "";
+        string text = ui.Plaintext_4->text().toStdString();
         string ch = "0";
         while (text.length() % 16 != 0)	//明文不足16位自动补0
             text += ch;
@@ -130,12 +140,12 @@ void QtWa::encryption()
         for (int i = 0; i < text.length();i++) {
             plain[i] = text[i];
         }
-        if (ui.key->text().size() != 16) {
-            ui.key->setText("The aes key must be 16 bits");
+        if (ui.Secretkey_4->text().size() != 16) {
+            ui.Secretkey_4->setText("The aes key must be 16 bits");
             return;
         }
         unsigned char key[16];
-        string ui_key = ui.key->text().toStdString();
+        string ui_key = ui.Secretkey_4->text().toStdString();
         for (int i = 0; i < 16; i++) {
             key[i] = ui_key[i];
         }
@@ -143,18 +153,36 @@ void QtWa::encryption()
         AES aes(AESKeyLength::AES_128);
         unsigned char* c = aes.EncryptECB(plain, text.length(), key);
         res = byteArrayToHexString(c,text.length());
+        ui.ciphertext_4->setText(res);
     }
-    ui.Ciphertext->setText(res);
+
+    //rsa
+    else if (ui.tabWidget->currentIndex() == 4) {
+        vector<int> num = key(ui.Secretkey_p->text().toInt(), ui.Secretkey_q->text().toInt());
+        ui.ciphertext_5->setText(QString::fromStdString(rsaen(num[0], num[2], ui.Plaintext_5->text().toStdString())));
+        ui.Secretkey_e->setText(QString::fromStdString(to_string(num[0])));
+        ui.Secretkey_n_1->setText(QString::fromStdString(to_string(num[2])));
+        ui.Secretkey_n_2->setText(QString::fromStdString(to_string(num[2])));
+        ui.Secretkey_d->setText(QString::fromStdString(to_string(num[1])));
+    }
+
+    //MD5
+    else if (ui.tabWidget->currentIndex() == 5) {
+        //QString res = QString::fromStdString(md5(ui.Plaintext_6->text().toStdString()));
+        ui.ciphertext_6->setText(QString::fromStdString(md5(ui.Plaintext_6->text().toStdString())));
+    }
 }
+
+
 
 //解密
 void QtWa::deciphering() {
-    QString res = "";
-    string text = ui.Plaintext->text().toStdString();
 
     //移位
-    if (ui.gression->isChecked()) {
-        int num = ui.Secretkey_b->text().toInt();
+    if (ui.tabWidget->currentIndex() == 0) {
+        QString res = "";
+        string text = ui.Plaintext_1->text().toStdString();
+        int num = ui.Secretkey_1->text().toInt();
         for (char str : text) {
             int x = str;
             if (x >= 97 && x <= 122) {
@@ -164,12 +192,15 @@ void QtWa::deciphering() {
                 res += 'A' + floor((x - 65 - num + 26) % 26);
             }
         }
+        ui.ciphertext_1->setText(res);
     }
 
     //仿射
-    else if (ui.affine->isChecked()) {
-        int num_a = ui.Secretkey_a->text().toInt();
-        int num_b = ui.Secretkey_b->text().toInt();
+    else if (ui.tabWidget->currentIndex() == 1) {
+        QString res = "";
+        string text = ui.Plaintext_2->text().toStdString();
+        int num_a = ui.Secretkey_2_1->text().toInt();
+        int num_b = ui.Secretkey_2_2->text().toInt();
         int x, y;
         int r = exgcd(num_a, 26, x, y);
         int ans = (x % 26 + 26) % 26;
@@ -182,17 +213,21 @@ void QtWa::deciphering() {
                 res += 'A' + (((x - 65) - num_b + 26) * ans) % 26;
             }
         }
+        ui.ciphertext_2->setText(res);
     }
 
     //des
-    else if (ui.des->isChecked()) {
-        res = QString::fromStdString(ECB(ui.cipher->text().toStdString(), ui.key->text().toStdString(), de));
+    else if (ui.tabWidget->currentIndex() == 2) {
+        QString res = "";
+        res = QString::fromStdString(ECB(ui.Plaintext_3->text().toStdString(), ui.Secretkey_3->text().toStdString(), de));
+        ui.ciphertext_3->setText(res);
     }
 
     //aes
-    else if (ui.aes->isChecked()) {
-        vector<unsigned char> plain = hexStringToByteArray(ui.cipher->text());
-        string ui_key = ui.key->text().toStdString();
+    else if (ui.tabWidget->currentIndex() == 3) {
+        QString res = "";
+        vector<unsigned char> plain = hexStringToByteArray(ui.Plaintext_4->text());
+        string ui_key = ui.Secretkey_4->text().toStdString();
 
         vector<unsigned char> key;
         for (int i = 0; i < 16; i++) {
@@ -206,8 +241,18 @@ void QtWa::deciphering() {
                 res += ch;
             }
         }
+        ui.ciphertext_4->setText(res);
     }
-    ui.Ciphertext->setText(res);
+
+    //rsa
+    else if (ui.tabWidget->currentIndex() == 4) {
+        ui.ciphertext_5->setText(QString::fromStdString(rsade(ui.Secretkey_d->text().toInt(), ui.Secretkey_n_2->text().toInt(), ui.ciphertext_5->text().toStdString())));
+    }
+
+    else if (ui.tabWidget->currentIndex() == 5) {
+
+    }
+    
 }
 
 int exgcd(int a, int b, int& x, int& y) {
